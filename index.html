@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page Title</title>
+</head>
+<body>
+  <script>
+    // Your JavaScript goes here!
+    function computerPlayer() {
+      let choices = ["rock", "paper", "scissors"];
+      let choice = Math.floor(Math.random() * 3)
+      return choices[choice]
+    }
+
+    function playRound(playerA, playerB) {
+        let choice = playerA.toLowerCase()
+        if (choice == playerB) {
+          console.log("Draw! Everybody loses.")
+          return null
+        } else if (choice == "rock") {
+          if (playerB == "paper") {
+            console.log("Lose! " + playerB + " beats " + choice)
+            return false
+          } else {
+            console.log("Win! " + choice + " beats " + playerB)
+            return true
+          }
+        } else if (choice == "paper") {
+          if (playerB == "scissors") {
+            console.log("Lose! " + playerB + " beats " + choice)
+            return false
+          } else {
+            console.log("Win! " + choice + " beats " + playerB)
+            return true
+          }
+        } else if (choice == "scissors") {
+          if (playerB == "rock") {
+            console.log("Lose! " + playerB + " beats " + choice)
+            return false
+          } else {
+            console.log("Win! " + choice + " beats " + playerB)
+            return true
+          }
+        } else {
+          console.log("Invalid input.")
+          return null
+        }
+    }
+
+    function game() {
+      let round = 1
+      let playerScore = 0
+      let computerScore = 0
+      console.log("Starting game of Rock Paper Scissors!")
+      while (round <= 5){
+        console.log("Round " + round)
+        let playerChoice = prompt("Type your choice.")
+        let computerChoice = computerPlayer()
+        let result = playRound(playerChoice, computerChoice)
+        if (result == true) {
+          playerScore++
+        } else if (result == false) {
+          computerScore++
+        } 
+        round++;
+      }
+      console.log("The human player scored " + playerScore + " and the robot scored " + computerScore)
+      if(playerScore > computerScore) {
+        console.log("The human wins!")
+      } else if (playerScore < computerScore) {
+        console.log("The computer wins!")
+      } else {
+        console.log("It was a draw overall. Oh well.")
+      }
+    }
+  </script>
+</body>
+</html>
