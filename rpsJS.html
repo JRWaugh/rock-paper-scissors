@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Rock Paper Scissors</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>First to Five Points Wins!</h1>
+  <h2 id="winner"></h2>
+  <div class="game">
+    <div class="player">
+      <h2 class="score">Score: 0</h2>
+      <div class="choices">
+        <div class="choice rock" id="Rock">Rock</div>
+        <div class="choice paper" id="Paper">Paper</div>
+        <div class="choice scissors" id="Scissors">Scissors</div>
+      </div>
+    </div>
+    <div class="computer">
+      <h2 class="score">Score: 0</h2>
+      <div class="choice">Computer</div>
+    </div>
+  </div>
+
+  <script>
+    // Your JavaScript goes here!
+    function computerPlayer() {
+      let choices = ["Rock", "Paper", "Scissors"];
+      let choice = Math.floor(Math.random() * 3)
+      return choices[choice]
+    }
+
+    function addPoint(bool) {
+      if(bool == true){
+        player.firstElementChild.textContent = "Score: " + ++playerScore
+        document.getElementById('winner').textContent = "Player wins the round!"
+      } else if (bool == false) {
+        computer.firstElementChild.textContent = "Score: " + ++computerScore
+        document.getElementById('winner').textContent = "Computer wins the round!"
+      }
+
+      if(playerScore == 5){
+        document.getElementById('winner').textContent = "Player has reached 5 points! PLAYER WINS"
+        endGame()
+      } else if(computerScore == 5) {
+        document.getElementById('winner').textContent = "Computer has reached 5 points! COMPUTER WINS"
+        endGame()
+      }
+    }
+
+    function endGame() {
+      choices.forEach(choice => choice.addEventListener('click', () => document.getElementById('winner').textContent = "Hey, The game is over!"));
+    }
+
+    function playRound(playerA) {
+      playerB = computerPlayer()
+      computer.lastElementChild.textContent = playerB
+      if (playerA == playerB) {
+        return null
+      } else if (playerA == "Rock") {
+        if (playerB == "Paper") {
+          addPoint(false)
+        } else {
+          addPoint(true)
+        }
+      } else if (playerA == "Paper") {
+        if (playerB == "Scissors") {
+          addPoint(false)
+        } else {
+          addPoint(true)
+        }
+      } else if (playerA == "Scissors") {
+        if (playerB == "Rock") {
+          addPoint(false)
+        } else {
+          addPoint(false)
+        }
+      } else {
+        return null
+      }
+    }
+
+    const player = document.querySelector('.player')
+    let playerScore = 0
+    const computer = document.querySelector('.computer')
+    let computerScore = 0
+
+    const choices = Array.from(document.querySelectorAll('.player .choice'));
+    choices.forEach(choice => choice.addEventListener('click', () => playRound(choice.id)));
+  </script>
+</body>
+
+</html>
